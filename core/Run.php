@@ -30,42 +30,39 @@ class Run
         // creates controller and action names (from URL input)
         $this->setNames();
 
-        // does such a controller exist ?
-        if (file_exists(Config::get('PATH_CONTROLLER') . $this->controller_name . '.php')) {
+        // // does such a controller exist ?
+        // if (file_exists(Config::get('PATH_CONTROLLER') . $this->app_name . '.php')) {
+        //
+        //     // load this file and create this controller
+        //     // example: if controller would be "car", then this line would translate into: $this->car = new car();
+        //     require Config::get('PATH_CONTROLLER') . $this->app_name . '.php';
+        //     $this->app = new $this->app_name();
+        //
+        //     $rendered = false;
+        //
+        //     // check for method: does such a method exist in the controller ?
+        //     if (method_exists($this->controller, $this->action_name)) {
+        //         if (!empty($this->parameters)) {
+        //             // call the method and pass arguments to it
+        //             $rendered = call_user_func_array(array($this->controller, $this->action_name), $this->parameters);
+        //         } else {
+        //             // if no parameters are given, just call the method without parameters, like $this->index->index();
+        //             $rendered = $this->controller->{$this->action_name}();
+        //         }
+        //     } else {
+        //         if (empty($this->parameters)) {
+        //             // if the method does not exist, try loading the action with index method
+        //             $rendered = $this->app->index($this->action_name);
+        //         } else {
+        //             array_unshift($this->parameters, $this->action_name);
+        //             $rendered = call_user_func_array(array($this->controller, 'index'), $this->parameters);
+        //         }
+        //     }
+        //
+        //     if ($rendered) return;
+        // }
 
-            // load this file and create this controller
-            // example: if controller would be "car", then this line would translate into: $this->car = new car();
-            require Config::get('PATH_CONTROLLER') . $this->controller_name . '.php';
-            $this->controller = new $this->controller_name();
-
-            $rendered = false;
-
-            // check for method: does such a method exist in the controller ?
-            if (method_exists($this->controller, $this->action_name)) {
-                if (!empty($this->parameters)) {
-                    // call the method and pass arguments to it
-                    $rendered = call_user_func_array(array($this->controller, $this->action_name), $this->parameters);
-                } else {
-                    // if no parameters are given, just call the method without parameters, like $this->index->index();
-                    $rendered = $this->controller->{$this->action_name}();
-                }
-            } else {
-                if (empty($this->parameters)) {
-                    // if the method does not exist, try loading the action with index method
-                    $rendered = $this->controller->index($this->action_name);
-                } else {
-                    array_unshift($this->parameters, $this->action_name);
-                    $rendered = call_user_func_array(array($this->controller, 'index'), $this->parameters);
-                }
-            }
-
-            if ($rendered) return;
-        }
-
-        // load 404 error page
-        require Config::get('PATH_CONTROLLER') . 'ErrorController.php';
-        $this->controller = new ErrorController;
-        $this->controller->not_found();
+        echo 'hi';
     }
 
     /**
@@ -73,7 +70,7 @@ class Run
      */
     private function splitUrl()
     {
-        $route = Home/Request::get('url');
+        $route = Request::get('url');
         if ($route) {
 
             // split URL
@@ -99,12 +96,12 @@ class Run
      */
     private function setNames()
     {
-        // check for controller: no controller given ? then make controller = default controller (from config)
+        // check for controller: no controller given ? then make controller = default controller (from Config)
         if (!$this->app_name) {
             $this->app_name = Config::get('DEFAULT_APP');
         }
 
-        // check for action: no action given ? then make action = default action (from config)
+        // check for action: no action given ? then make action = default action (from Config)
         if (!$this->action_name OR (strlen($this->action_name) == 0)) {
             $this->action_name = Config::get('DEFAULT_ACTION');
         }
