@@ -6,7 +6,9 @@
     "homepage": "https://github.com/thebittwisters/home",
     "license": "MIT",
     "autoload": {
-        "psr-4": { "Home": ["core/"] }
+        "psr-4": {
+            "Home\\": "core/"
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 <?php
 
+namespace Home;
 /**
  * Class Application
  * The heart of the application
