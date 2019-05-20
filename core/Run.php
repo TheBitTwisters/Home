@@ -8,12 +8,12 @@ namespace Home;
 class Run
 {
     /** @var mixed Instance of the controller */
-    private $app;
+    private $controller;
 
     /** @var array URL parameters, will be passed to used controller-method */
     private $parameters = array();
 
-    /** @var string Just the name of the app, useful for checks inside the view ("where am I ?") */
+    /** @var string Just the name of the controller, useful for checks inside the view ("where am I ?") */
     private $app_name;
 
     /** @var string Just the name of the controller's method, useful for checks inside the view ("where am I ?") */
@@ -30,39 +30,45 @@ class Run
         // creates controller and action names (from URL input)
         $this->setNames();
 
-        // // does such a controller exist ?
-        // if (file_exists(Config::get('PATH_CONTROLLER') . $this->app_name . '.php')) {
-        //
-        //     // load this file and create this controller
-        //     // example: if controller would be "car", then this line would translate into: $this->car = new car();
-        //     require Config::get('PATH_CONTROLLER') . $this->app_name . '.php';
-        //     $this->app = new $this->app_name();
-        //
-        //     $rendered = false;
-        //
-        //     // check for method: does such a method exist in the controller ?
-        //     if (method_exists($this->controller, $this->action_name)) {
-        //         if (!empty($this->parameters)) {
-        //             // call the method and pass arguments to it
-        //             $rendered = call_user_func_array(array($this->controller, $this->action_name), $this->parameters);
-        //         } else {
-        //             // if no parameters are given, just call the method without parameters, like $this->index->index();
-        //             $rendered = $this->controller->{$this->action_name}();
-        //         }
-        //     } else {
-        //         if (empty($this->parameters)) {
-        //             // if the method does not exist, try loading the action with index method
-        //             $rendered = $this->app->index($this->action_name);
-        //         } else {
-        //             array_unshift($this->parameters, $this->action_name);
-        //             $rendered = call_user_func_array(array($this->controller, 'index'), $this->parameters);
-        //         }
-        //     }
-        //
-        //     if ($rendered) return;
-        // }
+        $app_folder = Config::get('PATH_APPS') . $this->app_name . '/';
 
-        echo 'hi';
+        // does such app exist ?
+        if (file_exists($app_folder . 'Controller.php')) {
+
+            // load this file and create this controller
+            // example: if controller would be "car", then this line would translate into: $this->car = new car();
+            require $app_folder . 'Controller.php';
+            $this->controller = new '\\'.$this->app_name.'\\'.Controller();
+
+            $rendered = false;
+
+            // check for method: does such a method exist in the controller ?
+            if (method_exists($this->controller, $this->action_name)) {
+                if (!empty($this->parameters)) {
+                    // call the method and pass arguments to it
+                    $rendered = call_user_func_array(array($this->controller, $this->action_name), $this->parameters);
+                } else {
+                    // if no parameters are given, just call the method without parameters, like $this->index->index();
+                    $rendered = $this->controller->{$this->action_name}();
+                }
+            } else {
+                if (!empty($this->parameters)) {
+                    array_unshift($this->parameters, $this->action_name);
+                    $rendered = call_user_func_array(array($this->controller, 'index'), $this->parameters);
+                } else {
+                    // if the method does not exist, try loading the action with index method
+                    $rendered = $this->controller->index($this->action_name);
+                }
+            }
+
+            if ($rendered) return;
+        }
+
+        echo $app_folder;
+
+        require Config::get('PATH_APPS') . 'Error/Controller.php';
+        $this->controller = new \Error\Controller();
+        $this->controller->not_found();
     }
 
     /**
@@ -106,15 +112,15 @@ class Run
             $this->action_name = Config::get('DEFAULT_ACTION');
         }
 
-        // check if the application is on maintenance mode
-        if (Config::get('MAINTENANCE')) {
-            if ($this->app_name != 'error') {
-                Redirect::to('error/maintenance');
-                exit();
-            }
-        }
+        // // check if the application is on maintenance mode
+        // if (Config::get('MAINTENANCE')) {
+        //     if ($this->app_name != 'error') {
+        //         Redirect::to('error/maintenance');
+        //         exit();
+        //     }
+        // }
 
         // rename controller name to real controller class/file name ("index" to "IndexController")
-        $this->app_name = strtolower($this->app_name);
+        $this->app_name = ucwords($this->app_name);
     }
 }
