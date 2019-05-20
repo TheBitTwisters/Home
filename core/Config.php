@@ -12,10 +12,12 @@ class Config
             self::$config = self::read();
 
             $custom_config_file = self::$config['PATH_CONFIG'];
-            if (file_exists($config_file)) {
-                $custom_config = require $config_file;
+            if (file_exists($custom_config_file)) {
+                $custom_config = require $custom_config_file;
                 // merge
-                self::$config = array_merge_recursive(self::$config, $custom_config);
+                foreach ($custom_config as $key => $value) {
+                    self::$config[$key] = $value;
+                }
             }
         }
 
@@ -51,8 +53,8 @@ class Config
              'SITE_PRIVACY' => 'http://'.$base_url.'/about/privacy/',
 
              // PATH
-             'PATH_CONFIG' => realpath(dirname(__FILE__).'/../../') . '/config.php',
-             'PATH_APPS' => realpath(dirname(__FILE__).'/../../') . '/apps/',
+             'PATH_CONFIG' => realpath(dirname(__FILE__).'/../') . '/config.php',
+             'PATH_APPS' => realpath(dirname(__FILE__).'/../') . '/apps/',
 
              // APP & ACTN
              'DEFAULT_APP' => 'home',
