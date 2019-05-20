@@ -1,6 +1,6 @@
 <?php
 
-namespace Error;
+namespace Home;
 class Controller extends \Home\Controller
 {
 
@@ -9,9 +9,9 @@ class Controller extends \Home\Controller
         parent::__construct();
     }
 
-    public function not_found()
+    public function index()
 	{
-		$this->View->render('error/404');
+		$this->View->render('home/index');
 		return true;
 	}
 
