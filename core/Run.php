@@ -10,6 +10,7 @@ class Run
 
     public function __construct()
     {
+        Config::init();
         $this->splitUrl();
         $this->setNames();
 
