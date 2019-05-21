@@ -7,7 +7,7 @@ class View
     {
         if ($data) {
             foreach ($data as $key => $value) {
-                $this->{$key} = $value;
+                $this->data[$key] = $value;
             }
         }
         $filename = explode('/', $filename);
