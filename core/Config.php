@@ -35,6 +35,7 @@ class Config
             'URL_ROOT' => 'http://'.$base_url,
 
             'SITE_LOCALE' => 'en_US',
+            'SITE_TIMEZONE' => '+00:00',
             'SITE_NAME' => 'The Bit Twisters Home',
             'SITE_AUTHOR' => 'The Bit Twisters',
             'SITE_CAPTION' => 'A simple PHP MVC Framework - Home',
