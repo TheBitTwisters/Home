@@ -11,6 +11,7 @@ class Controller extends \Home\BaseController
 
     public function index()
 	{
+        $model = new Model();
 		$this->View->render('home/index');
 		return true;
 	}
