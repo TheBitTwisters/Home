@@ -36,9 +36,10 @@ class Run
         if (file_exists($app_folder . 'Controller.php')) {
 
             // load this file and create this controller
-            // example: if controller would be "car", then this line would translate into: $this->car = new car();
+            // example: if app would be "car", then this line would translate into: $this->car = new Car\Controller();
             require $app_folder . 'Controller.php';
-            $this->controller = new '\\'.$this->app_name.'\\'.Controller();
+            $controller_name = '\\'.$this->app_name.'\\Controller';
+            $this->controller = new $controller_name();
 
             $rendered = false;
 
