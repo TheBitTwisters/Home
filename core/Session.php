@@ -44,7 +44,6 @@ class Session
 
     public static function updateSession()
     {
-        // if (self::isUserLoggedIn())
-        //     LoginModel::updateActiveTimestamp();
+        // TODO: Future updates
     }
 }
