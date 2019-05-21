@@ -17,6 +17,11 @@ class View
         require Config::get('PATH_APPS') . $app_name . '/view/' . $file . '.php';
     }
 
+    public function config($key)
+    {
+        return Config::get($key);
+    }
+
     public function renderJSON($data)
     {
         header("Content-Type: application/json");

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="<?=\Home\Config::get('SITE_LOCALE')?>" prefix="og: http://ogp.me/ns#">
+<html lang="<?=$this->config('SITE_LOCALE')?>" prefix="og: http://ogp.me/ns#">
 <head>
-<title>Page not found &mdash; <?=\Home\Config::get('SITE_TITLE')?></title>
-<meta http-equiv="refresh" content="10; url=<?=\Home\Config::get('URL')?>">
+<title>Page Not Found &mdash; <?=$this->config('SITE_TITLE')?></title>
+<meta http-equiv="refresh" content="10; url=<?=$this->config('URL')?>">
+<?php $this->render('home/styles'); ?>
 </head>
 <body>
 <div class="container">
@@ -31,5 +32,6 @@
         </div>
     </main>
 </div>
+<?php $this->render('home/scripts'); ?>
 </body>
 </html>

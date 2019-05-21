@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="<?=\Home\Config::get('SITE_LOCALE')?>" prefix="og: http://ogp.me/ns#">
+<html lang="<?=$this->config('SITE_LOCALE')?>" prefix="og: http://ogp.me/ns#">
 <head>
-<title>Home &mdash; <?=\Home\Config::get('SITE_TITLE')?></title>
+<title>Home &mdash; <?=$this->config('SITE_TITLE')?></title>
+<?php $this->render('home/styles'); ?>
 </head>
 <body>
 <div class="container">
@@ -24,5 +25,6 @@
         </div>
     </main>
 </div>
+<?php $this->render('home/scripts'); ?>
 </body>
 </html>
