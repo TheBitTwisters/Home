@@ -1,7 +1,7 @@
 <?php
 
 namespace Error;
-class Controller extends \Home\Controller
+class Controller extends \Home\BaseController
 {
 
     public function __construct()
