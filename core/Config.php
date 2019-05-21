@@ -72,4 +72,10 @@ class Config
 
         );
     }
+
+    public static function print()
+    {
+        var_dump(self::$config);
+    }
+
 }
