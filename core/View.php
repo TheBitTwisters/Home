@@ -25,7 +25,7 @@ class View
         $app_name = ucwords($filename[0]);
         $file = $filename[1];
 
-        require Config::get('PATH_APPS') . $app_name . '/templates/' . $file . '.php';
+        require Config::get('PATH_APPS') . $app_name . '/view/' . $file . '.php';
     }
 
     /**
