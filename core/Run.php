@@ -18,7 +18,6 @@ class Run
 
         if (file_exists($app_folder . 'Controller.php')) {
             require $app_folder . 'Controller.php';
-            require $app_folder . 'Model.php';
             $controller_name = '\\'.$this->app_name.'\\Controller';
             $this->controller = new $controller_name();
 
