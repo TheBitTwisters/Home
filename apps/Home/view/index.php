@@ -28,3 +28,4 @@
 <?php $this->render('home/scripts'); ?>
 </body>
 </html>
+<?php $this->printData(); ?>

@@ -3,6 +3,9 @@
 namespace Home;
 class View
 {
+
+    public $data;
+
     public function render($filename, $data = null)
     {
         if ($data) {
@@ -31,6 +34,11 @@ class View
     public function encodeHTML($str)
     {
         return htmlentities($str, ENT_QUOTES, 'UTF-8');
+    }
+
+    public function printData()
+    {
+        var_dump($this->data);
     }
 
 }
