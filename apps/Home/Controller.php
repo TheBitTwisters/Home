@@ -11,8 +11,11 @@ class Controller extends \Home\BaseController
 
     public function index()
 	{
-        $model = new Model();
-		$this->View->render('home/index');
+        $model = $this->loadModel('user');
+        if ($model) {
+            $data['model'] = 'loaded';
+        }
+		$this->View->render('home/index', $data);
 		return true;
 	}
 
