@@ -1,7 +1,7 @@
 <?php
 
-namespace User;
-class Model extends \Home\BaseModel
+namespace User\Model;
+class Users extends \Home\BaseModel
 {
 
     public function __construct()
