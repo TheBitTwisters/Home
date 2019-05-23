@@ -4,14 +4,23 @@ namespace Home;
 class BaseModel
 {
     private $db;
+    public $error;
 
     public function __construct()
     {
-        if (!$this->$db) {
-            if (Config::get('DB_TYPE') == 'mysql') {
-                $this->mysqlSetup();
-            }
+        if (Config::get('DB_TYPE') == 'mysql') {
+            $this->mysqlSetup();
         }
+    }
+
+    public function count($query)
+    {
+        try {
+            $stmt = $this->db->prepare()
+        } catch (\PDOException $e) {
+
+        }
+
     }
 
     private function mysqlSetup()
@@ -23,7 +32,7 @@ class BaseModel
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING,
                 \PDO::MYSQL_ATTR_INIT_COMMAND => $timezone_setting
             ];
-            $this->db = new \PDO (
+            $this->$db = new \PDO (
                 'mysql' .
                 ':host=' . Config::get('DB_HOST') .
                 ';dbname=' . Config::get('DB_NAME') .
@@ -32,9 +41,7 @@ class BaseModel
                 Config::get('DB_USER'), Config::get('DB_PASS'), $options
             );
         } catch (\PDOException $e) {
-            $code = $e->getCode();
-            Redirect::to('error/db/'.$code);
-            exit();
+            $this->error = $e->getCode();
         }
     }
 
