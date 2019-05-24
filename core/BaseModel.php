@@ -6,6 +6,9 @@ class BaseModel
     private $db;
     public $error;
 
+    protected $tableName;
+    protected $columns;
+
     public function __construct()
     {
         if (Config::get('DB_TYPE') == 'mysql') {
@@ -13,14 +16,40 @@ class BaseModel
         }
     }
 
-    public function count($query)
+    public function run($query, $data = null)
     {
         try {
-            $stmt = $this->db->prepare()
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($data);
+            return $stmt->fetchAll();
         } catch (\PDOException $e) {
-
+            $this->error = $e->getCode();
         }
+        return false;
+    }
 
+    public function count($data = null)
+    {
+        try {
+            $sql = 'SELECT COUNT(*) FROM '.$this->tableName;
+            if ($data) {
+                $sql .= ' WHERE ';
+                $q = [];
+                foreach ($data as $key => $value) {
+                    $q[] = ' '.$key.'=:'.$key.' ';
+                }
+                $sql .= implode(' AND ', $q);
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute($data);
+            } else {
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute();
+            }
+            return $stmt->fetchColumn();
+        } catch (\PDOException $e) {
+            $this->error = $e->getCode();
+        }
+        return 0;
     }
 
     private function mysqlSetup()
@@ -32,7 +61,7 @@ class BaseModel
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING,
                 \PDO::MYSQL_ATTR_INIT_COMMAND => $timezone_setting
             ];
-            $this->$db = new \PDO (
+            $this->db = new \PDO(
                 'mysql' .
                 ':host=' . Config::get('DB_HOST') .
                 ';dbname=' . Config::get('DB_NAME') .
