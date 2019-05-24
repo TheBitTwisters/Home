@@ -24,4 +24,9 @@ class BaseController
         return false;
     }
 
+    public function render($filename, $data = null)
+    {
+        $this->View->render($filename, $data);
+    }
+
 }
