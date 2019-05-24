@@ -14,11 +14,14 @@ class BaseController
 
     public function loadModel($modelname)
     {
-        $app_name = ucwords($modelname);
-        $file = Config::get('PATH_APPS') . $app_name . '/Model.php';
+        $modelname = explode('/', $modelname);
+        $app_name = ucwords($modelname[0]);
+        $model = ucwords($modelname[1]);
+
+        $file = Config::get('PATH_APPS') . $app_name . '/models/' . $model . '.php';
         if (file_exists($file)) {
             require $file;
-            $model = '\\'.$app_name.'\\Model';
+            $model = '\\'.$app_name.'\\Model\\'.$model;
             return new $model();
         }
         return false;
