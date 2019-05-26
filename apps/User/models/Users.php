@@ -14,9 +14,9 @@ class Users extends \Home\BaseModel
         ];
     }
 
-    public function getAllUsers()
+    public function getAllUsers($limit = 100)
     {
-        $sql = 'SELECT * FROM users';
+        $sql = 'SELECT * FROM users LIMIT '.$limit;
         return $this->run($sql);
     }
 

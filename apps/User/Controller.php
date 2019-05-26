@@ -14,10 +14,11 @@ class Controller extends \Home\BaseController
         $model = $this->loadModel('user/users');
         $data['test'] = $testparam;
         if ($model) {
-            $data['users'] = $model->getAllUsers();
+            $data['users'] = $model->getAllUsers($testparam);
             $data['count'] = $model->countAllUsers();
         }
-		$this->render('user/index', $data);
+		//$this->render('user/index', $data);
+        $this->renderJSON($data);
 		return true;
 	}
 
