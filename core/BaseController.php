@@ -32,4 +32,9 @@ class BaseController
         $this->View->render($filename, $data);
     }
 
+    public function renderJSON($data = null)
+    {
+        $this->View->renderJSON($data);
+    }
+
 }
