@@ -31,8 +31,9 @@ class Config
 
             'MAINTENANCE' => false,
 
-            'URL' => 'http://'.$base_url.'/',
-            'URL_ROOT' => 'http://'.$base_url,
+            'URL' => 'http://'.$base_url,
+            'URL_ROOT' => 'http://'.$base_url.'/',
+            'URL_PLUGINS' => 'http://'.$base_url.'/plugins',
 
             'SITE_LOCALE' => 'en_US',
             'SITE_TIMEZONE' => '+00:00',
@@ -41,10 +42,11 @@ class Config
             'SITE_CAPTION' => 'A simple PHP MVC Framework - Home',
             'SITE_DESCRIPT' => 'A simple PHP MVC Framework - Home',
             'SITE_KEYWORDS' => 'php, home, thebittwisters, mvc, framework',
-            'SITE_LOGO' => 'http:/'.$base_url.'/img/home.png',
-            'SITE_PREVIEW' => 'http:/'.$base_url.'/img/home-preview.jpg',
-            'SITE_TERMS' => 'http:/'.$base_url.'/about/terms/',
-            'SITE_PRIVACY' => 'http:/'.$base_url.'/about/privacy/',
+            'SITE_LOGO' => '/img/home.png',
+            'SITE_ICON' => '/ico/favicon.ico',
+            'SITE_PREVIEW' => '/img/home-preview.jpg',
+            'SITE_TERMS' => '/about/terms/',
+            'SITE_PRIVACY' => '/about/privacy/',
 
             'PATH_CONFIG' => realpath(dirname(__FILE__).'/../') . '/config.php',
             'PATH_APPS' => realpath(dirname(__FILE__).'/../') . '/apps/',
@@ -55,17 +57,22 @@ class Config
             'DB_TYPE' => 'mysql',
             'DB_HOST' => '*',
             'DB_NAME' => 'test',
-            'DB_USER' => 'admin',
-            'DB_PASS' => 'UndefinedPassword',
+            'DB_USER' => 'root',
+            'DB_PASS' => '',
             'DB_PORT' => '3306',
             'DB_CHARSET' => 'utf8mb4',
 
             'COOKIE_RUNTIME' => 604800,
             'COOKIE_PATH' => '/',
-            'COOKIE_DOMAIN' => $base_url,
+            'COOKIE_DOMAIN' => '',
             'COOKIE_SECURE' => true,
             'COOKIE_HTTP' => true,
             'SESSION_RUNTIME' => 604800,
+
+            'IMAGE_LOGO_WIDTH' => 360,
+            'IMAGE_LOGO_HEIGHT' => 360,
+            'IMAGE_MAXWIDTH' => 1280,
+            'IMAGE_MAXHEIGHT' => 720,
 
         );
     }
