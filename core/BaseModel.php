@@ -16,18 +16,6 @@ class BaseModel
         }
     }
 
-    public function run($query, $data = null)
-    {
-        try {
-            $stmt = $this->db->prepare($query);
-            $stmt->execute($data);
-            return $stmt->fetchAll();
-        } catch (\PDOException $e) {
-            $this->error = $e->getCode();
-        }
-        return false;
-    }
-
     public function count($data = null)
     {
         try {
@@ -50,6 +38,18 @@ class BaseModel
             $this->error = $e->getCode();
         }
         return 0;
+    }
+
+    public function run($query, $data = null)
+    {
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($data);
+            return $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            $this->error = $e->getCode();
+        }
+        return false;
     }
 
     private function mysqlSetup()
