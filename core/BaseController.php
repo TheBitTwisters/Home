@@ -27,14 +27,20 @@ class BaseController
         return false;
     }
 
-    public function render($filename, $data = null)
+    public function pass($data)
     {
-        $this->View->render($filename, $data);
+        $this->View->receive($data);
     }
 
-    public function renderJSON($data = null)
+    public function render($filename)
     {
-        $this->View->renderJSON($data);
+        $this->View->render($filename);
+    }
+
+    public function renderJSON($data)
+    {
+        header("Content-Type: application/json");
+        echo json_encode($data);
     }
 
 }
