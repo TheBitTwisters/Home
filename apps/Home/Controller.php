@@ -11,8 +11,23 @@ class Controller extends \Home\BaseController
 
     public function index()
 	{
-		$this->render('home/index');
+        $data = [];
+
+        $model = $this->loadModel('home/Company');
+        if ($model) {
+            $data['profile'] = $model->get('profile');
+            $data['address'] = $model->get('address');
+            $data['phones'] = $model->get('phones');
+        }
+
+		$this->render('home/index', $data);
 		return true;
 	}
+
+    public function terms()
+    {
+		$this->render('home/terms');
+		return true;
+    }
 
 }
