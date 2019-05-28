@@ -3,7 +3,7 @@
 namespace Home;
 class BaseController
 {
-    public $View;
+    private $View;
 
     public function __construct()
     {
@@ -27,13 +27,9 @@ class BaseController
         return false;
     }
 
-    public function pass($data)
+    public function render($filename, $data = null)
     {
-        $this->View->receive($data);
-    }
-
-    public function render($filename)
-    {
+        $this->View->receiveData($data);
         $this->View->render($filename);
     }
 

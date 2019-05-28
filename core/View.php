@@ -6,7 +6,7 @@ class View
 
     public $data;
 
-    public function receive($data)
+    public function receiveData($data)
     {
         if ($data) {
             foreach ($data as $key => $value) {
