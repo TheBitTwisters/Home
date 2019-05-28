@@ -80,28 +80,17 @@ a:hover
     opacity: 0.8;
 }
 
-.quote
+.pfs-panel
 {
-    text-align: center;
-    font-family: 'Cookie', cursive;
-    color: #fff;
-    text-shadow: 0 0 3px #000;
+    margin: 5rem;
 }
-.author
-{
-    text-align: center;
-    font-size: 12pt;
-    color: #fff;
-    text-shadow: 0 0 1px #000;
-}
-
-.content-title
+.pfs-title
 {
     font-weight: bolder;
     text-align: left;
     text-shadow: 0 0 2px #fff;
 }
-.content-text
+.pfs-paragraph
 {
     font-size: 12pt;
     text-indent: 50px;

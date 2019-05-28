@@ -15,20 +15,37 @@
                 <p class="slogan"><?=$this->config('SITE_CAPTION')?></p>
             </div>
             <main>
-                <div class="row">
-                    <div class="col-md-8">
-<?php $this->render('quotes/message'); ?>
-                        <h3 class="content-title">You can trust Us</h3>
-                        <p class="content-text">
-                            <?= $this->data['profile'] ?>
-                        </p>
-                        <h3 class="content-title">What&apos;s new?</h3>
-<?php $this->render('news/list'); ?>
-                    </div>
-                    <div class="col-md-4">
-<?php $this->render('offers/sidenav'); ?>
-                    </div>
+                <!-- profile -->
+                <div class="pfs-panel">
+                    <h3 class="pfs-title">You can trust Us</h3>
+                    <p class="pfs-paragraph">
+                        <?= $this->data['profile'] ?>
+                    </p>
                 </div>
+                <!-- offers -->
+                <div id="offers">
+                    <h3 class="pfs-title">Our Offers</h3>
+                    <p class="pfs-paragraph">
+                        Our staff is committed to providing your family with the highest quality care and service in your time of need.
+                    </p>
+<?php if (!empty($this->data['offers'])): ?>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+<?php foreach ($this->data['offers'] as $offer): ?>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <a class="thumbnail" href="<?=PostUtil::getLink($offer->offer_id, 'offers')?>">
+                                    <img src="<?=PostUtil::getImageLink($offer->thumb_url)?>" alt="<?=PostUtil::getSafetyText($offer->title)?>">
+                                    <div class="caption">
+                                        <?=PostUtil::getSafetyText($offer->title)?>
+                                    </div>
+                                </a>
+                            </div>
+<?php endforeach; ?>
+                        </div>
+                    </div>
+<?php endif; ?>
+                </div>
+
             </main>
 <?php $this->render('home/template_footer'); ?>
         </div>
