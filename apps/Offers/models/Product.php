@@ -1,7 +1,7 @@
 <?php
 
 namespace Offers\Model;
-class Products extends \Home\BaseModel
+class Product extends \Home\BaseModel
 {
 
     public function __construct()
@@ -17,9 +17,9 @@ class Products extends \Home\BaseModel
         ];
     }
 
-    public function get($name)
+    public function getPopular($limit)
     {
-        $sql = "SELECT value FROM {$this->tableName} WHERE name='{$name}' ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT * FROM {$this->tableName} ORDER BY id DESC LIMIT 1";
         $value = $this->run($sql);
         if ($value) {
             return reset($value)->value;
