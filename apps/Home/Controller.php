@@ -1,6 +1,7 @@
 <?php
 
 namespace Home;
+use \Home\RenderType as RenderType;
 class Controller extends \Home\BaseController
 {
 
@@ -21,13 +22,14 @@ class Controller extends \Home\BaseController
         }
 
 		$this->render('home/index', $data);
-		return true;
+		return RenderType::OK;
 	}
 
+        return RenderType::OK;
     public function terms()
     {
 		$this->render('home/terms');
-		return true;
+		return RenderType::OK;
     }
 
 }
