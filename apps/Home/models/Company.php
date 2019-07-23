@@ -1,30 +1,30 @@
 <?php
 
 namespace Home\Model;
-class Company extends \Home\BaseModel
+
+use \Home\BaseModel as BaseModel;
+use \PDO as PDO;
+
+class Company extends BaseModel
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->tableName = 'company';
-        $this->columns = [
-            'id',
-            'name',
-            'value',
-            'user_id',
-            'ts_create'
-        ];
     }
 
-    public function get($name)
+    public function getDetails()
     {
-        $sql = "SELECT value FROM {$this->tableName} WHERE name='{$name}' ORDER BY id DESC LIMIT 1";
-        $value = $this->run($sql);
-        if ($value) {
-            return reset($value)->value;
-        }
-        return '';
+        $sql = "SELECT name, value
+                  FROM company
+                 WHERE id IN (
+                     SELECT MAX(id)
+                       FROM company
+                   GROUP BY name
+                 )";
+        $data = [];
+        $this->run($sql, $data);
+        return $this->fetchAll(PDO::FETCH_KEY_PAIR);
     }
 
 }
