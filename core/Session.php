@@ -1,6 +1,7 @@
 <?php
 
 namespace Home;
+
 class Session
 {
     public static function init()
@@ -35,6 +36,11 @@ class Session
     {
         session_destroy();
         session_start();
+    }
+
+    public static function error($error)
+    {
+        self::add('error', $error);
     }
 
     public static function isUserLoggedIn()
