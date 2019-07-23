@@ -23,13 +23,6 @@ class Request
         }
     }
 
-    public static function cookie($key)
-    {
-        if (isset($_COOKIE[$key])) {
-            return $_COOKIE[$key];
-        }
-    }
-
     public static function type($check=null)
     {
         if (!$check)
