@@ -1,13 +1,12 @@
 <?php
 
 namespace Home;
+
 class Request
 {
-    public static function post($key, $clean = false)
+    public static function post($key, $clean = true)
     {
         if (isset($_POST[$key])) {
-            // we use the Ternary Operator here which saves the if/else block
-            // @see http://davidwalsh.name/php-shorthand-if-else-ternary-operators
             return ($clean) ? trim(strip_tags($_POST[$key])) : $_POST[$key];
         }
     }
