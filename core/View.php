@@ -1,6 +1,7 @@
 <?php
 
 namespace Home;
+
 class View
 {
 
@@ -17,11 +18,12 @@ class View
 
     public function render($filename)
     {
-        $filename = explode('/', $filename);
-        $app_name = ucwords($filename[0]);
-        $file = $filename[1];
+        $filename = explode('/', strtolower($filename));
+        list($app, $file) = $filename;
+        $app = ucwords($app);
+        $file = $file;
 
-        include Config::get('PATH_APPS') . $app_name . '/view/' . $file . '.php';
+        include(Config::get('PATH_APPS') . $app . '/view/' . $file . '.php');
     }
 
     public function config($key)

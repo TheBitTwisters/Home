@@ -1,39 +1,41 @@
 <?php
 
 namespace Home;
+
 class BaseController
 {
-    private $View;
+    private $view;
 
     public function __construct()
     {
         Session::init();
 
-        $this->View = new View();
+        $this->view = new View();
     }
 
-    public function loadModel($modelname)
+    protected function loadModel($modelname)
     {
-        $modelname = explode('/', $modelname);
-        $app_name = ucwords($modelname[0]);
-        $model = ucwords($modelname[1]);
+        $modelname = explode('/', strtolower($modelname));
+        list($app, $model) = $modelname;
+        $app = ucwords($app);
+        $model = ucwords($model);
 
-        $file = Config::get('PATH_APPS') . $app_name . '/models/' . $model . '.php';
+        $file = Config::get('PATH_APPS') . $app . '/models/' . $model . '.php';
         if (file_exists($file)) {
-            require $file;
-            $model = '\\'.$app_name.'\\Model\\'.$model;
+            require_once($file);
+            $model = '\\'.$app.'\\Model\\'.$model;
             return new $model();
         }
         return false;
     }
 
-    public function render($filename, $data = null)
+    protected function render($filename, $data = null)
     {
-        $this->View->receiveData($data);
-        $this->View->render($filename);
+        $this->view->receiveData($data);
+        $this->view->render($filename);
     }
 
-    public function renderJSON($data)
+    protected function renderJSON($data)
     {
         header("Content-Type: application/json");
         echo json_encode($data);
