@@ -1,8 +1,12 @@
 <?php
 
 namespace Home;
+
 use \Home\RenderType as RenderType;
+use \Home\Request as Request;
 use \Home\Mail as Mail;
+use \Home\Config as Config;
+
 class Controller extends \Home\BaseController
 {
 
@@ -17,9 +21,7 @@ class Controller extends \Home\BaseController
 
         $model = $this->loadModel('home/Company');
         if ($model) {
-            $data['profile'] = $model->get('profile');
-            $data['address'] = $model->get('address');
-            $data['phones'] = $model->get('phones');
+            $data['company'] = $model->getDetails();
         }
 
 		$this->render('home/index', $data);
