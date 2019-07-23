@@ -1,6 +1,7 @@
 <?php
 
 namespace Home;
+
 class Run
 {
     private $controller;
@@ -14,12 +15,19 @@ class Run
         $this->splitUrl();
         $this->setNames();
 
-        $rendered = $this->run();
+        $this->run();
 
-        if (!$rendered) {
-            require Config::get('PATH_APPS') . 'Error/Controller.php';
-            $this->controller = new \Error\Controller();
-            $this->controller->not_found();
+        $rendered = $this->render();
+
+        switch ($rendered) {
+            case RenderType::NOT_FOUND:
+                $this->renderNotFound();
+                break;
+            case RenderType::REQUIRE_LOGIN:
+                Redirect::login();
+                break;
+            default:
+                break;
         }
     }
 
@@ -55,28 +63,47 @@ class Run
     private function run()
     {
         $app_folder = Config::get('PATH_APPS') . $this->app_name . '/';
-
         if (file_exists($app_folder . 'Controller.php')) {
-            require $app_folder . 'Controller.php';
+            require_once($app_folder . 'Controller.php');
             $controller_name = '\\'.$this->app_name.'\\Controller';
             $this->controller = new $controller_name();
+        }
+    }
 
-            if (method_exists($this->controller, $this->action_name)) {
-                if (!empty($this->parameters)) {
-                    return call_user_func_array(array($this->controller, $this->action_name), $this->parameters);
-                } else {
-                    return $this->controller->{$this->action_name}();
-                }
+    private function render()
+    {
+        if (method_exists($this->controller, $this->action_name)) {
+            if (!empty($this->parameters)) {
+                return call_user_func_array(array($this->controller, $this->action_name), $this->parameters);
             } else {
-                if (!empty($this->parameters)) {
-                    array_unshift($this->parameters, $this->action_name);
-                    return call_user_func_array(array($this->controller, 'index'), $this->parameters);
-                } else {
-                    return $this->controller->index($this->action_name);
-                }
+                return $this->controller->{$this->action_name}();
+            }
+        } else {
+            if (!empty($this->parameters)) {
+                array_unshift($this->parameters, $this->action_name);
+                return call_user_func_array(array($this->controller, 'index'), $this->parameters);
+            } else {
+                return $this->controller->index($this->action_name);
             }
         }
-        return false;
+        return RenderType::NOT_FOUND;
     }
+
+    private function renderNotFound()
+    {
+        $this->app_name = 'Error';
+        $this->action_name = 'not_found';
+        $this->run();
+        $this->render();
+    }
+
+}
+
+abstract class RenderType
+{
+
+    const OK = 1;
+    const NOT_FOUND = 2;
+    const REQUIRE_LOGIN = 3;
 
 }
