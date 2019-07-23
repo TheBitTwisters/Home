@@ -1,6 +1,7 @@
 <?php
 
 namespace Home;
+
 class Config
 {
     public static $config;
@@ -53,6 +54,8 @@ class Config
 
             'DEFAULT_APP' => 'home',
             'DEFAULT_ACTION' => 'index',
+
+            'DEFAULT_LOGIN_URL' => '/login',
 
             'DB_TYPE' => 'mysql',
             'DB_HOST' => '*',
