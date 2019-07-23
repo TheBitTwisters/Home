@@ -3,15 +3,13 @@
 <meta property="og:site_name"       content="<?=$this->config('SITE_TITLE')?>">
 <meta property="og:locale"          content="<?=$this->config('SITE_LOCALE')?>">
 <meta property="og:type"            content="website">
-<meta property="og:title"           content="<?=$this->config('SITE_NAME')?>">
+<meta property="og:title"           content="<?=$this->config('SITE_TITLE')?>">
 <meta property="og:description"     content="<?=$this->config('SITE_DESCRIPT')?>">
 <meta property="og:image"           content="<?=$this->config('SITE_PREVIEW')?>">
 <meta property="og:image:width"     content="<?=$this->config('IMAGE_MAXWIDTH')?>">
 <meta property="og:image:height"    content="<?=$this->config('IMAGE_MAXHEIGHT')?>">
-<meta property="fb:app_id"          content="<?=$this->config('FB_APP_ID')?>">
-<meta property="fb:pages"           content="<?=$this->config('FB_PAGE_ID')?>">
 <meta name="twitter:card"           content="summary_large_image">
-<meta name="twitter:title"          content="<?=$this->config('SITE_NAME')?>">
+<meta name="twitter:title"          content="<?=$this->config('SITE_TITLE')?>">
 <meta name="twitter:description"    content="<?=$this->config('SITE_DESCRIPT')?>">
 <meta name="twitter:image"          content="<?=$this->config('SITE_PREVIEW')?>">
 <meta name="twitter:domain"         content="<?=$this->config('URL')?>">

@@ -1,6 +1,7 @@
 <?php
 
 namespace Home;
+
 class Filter
 {
 

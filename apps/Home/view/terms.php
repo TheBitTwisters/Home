@@ -7,17 +7,11 @@
 <?php $this->render('home/template_meta'); ?>
 <?php $this->render('home/template_seo'); ?>
 <?php $this->render('home/template_styles'); ?>
-        <style media="screen">
-            .panel
-            {
-                margin-bottom: 0;
-            }
-        </style>
     </head>
-    <body>
+    <body class="pfs-body">
         <div class="container">
-            <div class="panel panel-default">
-                <div class="panel-heading text-center">
+            <div class="card bg-light mb-0">
+                <div class="card-header text-center">
                     <h1><?=$this->config('SITE_TITLE')?></h1>
                     <h2>Terms and Conditions</h2>
                 </div>
@@ -108,11 +102,11 @@
                     <li class="list-group-item"><strong>11. Contact Us</strong>
                         <ul>
                             <li>You can send us a message through our contact form.</li>
-                            <li><a href="/contact">Send message</a></li>
+                            <li><a href="/home#contact">Send message</a></li>
                         </ul>
                     </li>
                 </ul>
-                <div class="panel-footer text-center">
+                <div class="card-footer text-center">
                     <small>Last updated: January 16, 2017 9:30PM</small>
                 </div>
             </div>
