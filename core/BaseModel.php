@@ -1,67 +1,66 @@
 <?php
 
 namespace Home;
+
+use \PDO as PDO;
+use \PDOException as PDOException;
+
 class BaseModel
 {
     private $db;
-    public $error;
-
-    protected $tableName;
-    protected $columns;
+    protected $stmt;
 
     public function __construct()
     {
-        if (Config::get('DB_TYPE') == 'mysql') {
-            $this->mysqlSetup();
-        }
+        $this->setup();
     }
 
-    public function count($data = null)
+    protected function run($sql, $data)
     {
-        try {
-            $sql = 'SELECT COUNT(*) FROM '.$this->tableName;
-            if ($data) {
-                $sql .= ' WHERE ';
-                $q = [];
-                foreach ($data as $key => $value) {
-                    $q[] = ' '.$key.'=:'.$key.' ';
-                }
-                $sql .= implode(' AND ', $q);
-                $stmt = $this->db->prepare($sql);
-                $stmt->execute($data);
-            } else {
-                $stmt = $this->db->prepare($sql);
-                $stmt->execute();
+        $this->stmt = $this->db->prepare($sql);
+        $this->stmt->execute($data);
+        return $this->stmt;
+    }
+
+    protected function fetch($fetch_type = null)
+    {
+        if ($fetch_type) {
+            return $this->stmt->fetch($fetch_type);
+        }
+        return $this->stmt->fetch();
+    }
+
+    protected function fetchAll($fetch_type = null, $fetch_argument = null)
+    {
+        if ($fetch_type) {
+            if ($fetch_argument) {
+                return $this->stmt->fetchAll($fetch_type, $fetch_argument);
             }
-            return $stmt->fetchColumn();
-        } catch (\PDOException $e) {
-            $this->error = $e->getCode();
+            return $this->stmt->fetchAll($fetch_type);
         }
-        return 0;
+        return $this->stmt->fetchAll();
     }
 
-    public function run($query, $data = null)
+    private function setup()
     {
-        try {
-            $stmt = $this->db->prepare($query);
-            $stmt->execute($data);
-            return $stmt->fetchAll();
-        } catch (\PDOException $e) {
-            $this->error = $e->getCode();
+        $db_type = Config::get('DB_TYPE');
+        if ($db_type == 'mysql') {
+            $this->db = $this->setupMysql();
         }
-        return false;
     }
 
-    private function mysqlSetup()
+    private function setupMysql()
     {
+        $db = false;
         try {
-            $timezone_setting = "SET time_zone='".Config::get('SITE_TIMEZONE')."'";
+            $timezone = Config::get('SITE_TIMEZONE');
+            $timezone_setting = "SET time_zone='{$timezone}'";
             $options = [
-                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ,
-                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING,
-                \PDO::MYSQL_ATTR_INIT_COMMAND => $timezone_setting
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
+                PDO::MYSQL_ATTR_INIT_COMMAND => $timezone_setting
             ];
-            $this->db = new \PDO(
+            $db = new \PDO(
                 'mysql' .
                 ':host=' . Config::get('DB_HOST') .
                 ';dbname=' . Config::get('DB_NAME') .
@@ -69,9 +68,14 @@ class BaseModel
                 ';charset=' . Config::get('DB_CHARSET'),
                 Config::get('DB_USER'), Config::get('DB_PASS'), $options
             );
-        } catch (\PDOException $e) {
-            $this->error = $e->getCode();
+        } catch (PDOException $e) {
+            $error = array();
+            $error['name'] = 'Database Error';
+            $error['code'] = $e->getCode();
+            $error['message'] = $e->getMessage();
+            Session::error($error);
         }
+        return $db;
     }
 
 }
