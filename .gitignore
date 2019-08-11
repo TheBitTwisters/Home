@@ -2,3 +2,6 @@
 *.log
 vendor/
 /config.php
+template_analytics.php
+template_adsense.php
+public/img/
