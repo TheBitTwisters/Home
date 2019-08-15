@@ -55,6 +55,8 @@ class Config
             'DEFAULT_APP' => 'home',
             'DEFAULT_ACTION' => 'index',
 
+            'CSRF_VALIDITY' => 3600,
+
             'LOGIN_URL' => '/login',
             'LOGIN_REDIRECT_URL' => '/admin',
             'LOGIN_CHECK_SESSION' => true,
