@@ -4,10 +4,10 @@ namespace Home;
 
 class Run
 {
-    private $controller;
+    private $controller = null;
     private $parameters = array();
-    private $app_name;
-    private $action_name;
+    private $app_name = '';
+    private $action_name = '';
 
     public function __construct()
     {
@@ -72,18 +72,20 @@ class Run
 
     private function render()
     {
-        if (method_exists($this->controller, $this->action_name)) {
-            if (!empty($this->parameters)) {
-                return call_user_func_array(array($this->controller, $this->action_name), $this->parameters);
+        if ($this->controller) {
+            if (method_exists($this->controller, $this->action_name)) {
+                if (!empty($this->parameters)) {
+                    return call_user_func_array(array($this->controller, $this->action_name), $this->parameters);
+                } else {
+                    return $this->controller->{$this->action_name}();
+                }
             } else {
-                return $this->controller->{$this->action_name}();
-            }
-        } else {
-            if (!empty($this->parameters)) {
-                array_unshift($this->parameters, $this->action_name);
-                return call_user_func_array(array($this->controller, 'index'), $this->parameters);
-            } else {
-                return $this->controller->index($this->action_name);
+                if (!empty($this->parameters)) {
+                    array_unshift($this->parameters, $this->action_name);
+                    return call_user_func_array(array($this->controller, 'index'), $this->parameters);
+                } else {
+                    return $this->controller->index($this->action_name);
+                }
             }
         }
         return RenderType::NOT_FOUND;
