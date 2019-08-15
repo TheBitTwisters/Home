@@ -15,6 +15,11 @@ class Cookie
             Config::get('COOKIE_SECURE'), Config::get('COOKIE_HTTP'));
     }
 
+    public static function get($key)
+    {
+        return $_COOKIE[$key];
+    }
+
     public static function remove($name)
     {
         setcookie($name, '', 1);
