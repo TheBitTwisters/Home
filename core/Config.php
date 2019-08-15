@@ -55,7 +55,11 @@ class Config
             'DEFAULT_APP' => 'home',
             'DEFAULT_ACTION' => 'index',
 
-            'DEFAULT_LOGIN_URL' => '/login',
+            'LOGIN_URL' => '/login',
+            'LOGIN_REDIRECT_URL' => '/admin',
+            'LOGIN_CHECK_SESSION' => true,
+            'LOGIN_FAILED_COUNTS' => 3,
+            'LOGIN_RETRY_TIME' => 60,
 
             'DB_TYPE' => 'mysql',
             'DB_HOST' => '*',
