@@ -31,6 +31,11 @@ class View
         return Config::get($key);
     }
 
+    public function session($key)
+    {
+        return Session::get($key);
+    }
+
     public function printData()
     {
         var_dump($this->data);
