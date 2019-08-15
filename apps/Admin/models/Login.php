@@ -2,7 +2,10 @@
 
 namespace Admin\Model;
 
+use \Home\Config as Config;
+use \Home\Session as Session;
 use \PDO as PDO;
+use \Home\Cookie as Cookie;
 
 class Login extends \Home\BaseModel
 {
@@ -12,58 +15,63 @@ class Login extends \Home\BaseModel
         parent::__construct();
     }
 
+    public function isLoginAvailable()
+    {
+        $last_login = time() - Session::get('failed_login_ts');
+        if ($last_login < Config::get('LOGIN_RETRY_TIME')) {
+            return Session::get('failed_login_count') < Config::get('LOGIN_FAILED_COUNTS');
+        }
+        $this->resetFailedLoginCount();
+        return true;
+    }
+
     public function validate($username, $password)
+    {
+        $user = $this->getUser($username);
+
+        if ($user && password_verify($password, $user->password_hash)) {
+            $this->setSession($user);
+            return true;
+        } else {
+            self::incrementFailedLoginCount();
+            return false;
+        }
+    }
+
+    private function getUser($username)
     {
         $sql = "SELECT id, name, password_hash, active, group_id
                   FROM users
                  WHERE name = :name";
         $data = [':name' => $username];
         $this->run($sql, $data);
-        $this->fetch(PDO::FETCH_KEY_PAIR);
+        return $this->fetch();
     }
 
-    public function login($username, $password, $rememberme_cookie = null)
+    private function incrementFailedLoginCount()
     {
-        // we do negative-first checks here, for simplicity empty username and empty password in one line
-        if (empty($user_name) OR empty($user_password)) {
-            Session::add('feedback_negative', Text::get('FEEDBACK_USERNAME_OR_PASSWORD_FIELD_EMPTY'));
-            return false;
-        }
-        // checks if user exists, if login is not blocked (due to failed logins) and if password fits the hash
-        $result = self::validateAndGetUser($user_name, $user_password);
-        // check if that user exists. We don't give back a cause in the feedback to avoid giving an attacker details.
-        if (!$result) {
-            //No Need to give feedback here since whole validateAndGetUser controls gives a feedback
-            return false;
-        }
-        // stop the user's login if account has been soft deleted
-        if ($result->user_deleted == 1) {
-            Session::add('feedback_negative', Text::get('FEEDBACK_DELETED'));
-            return false;
-        }
-        // stop the user from logging in if user has a suspension, display how long they have left in the feedback.
-        if ($result->user_suspension_timestamp != null && $result->user_suspension_timestamp - time() > 0) {
-            $suspensionTimer = Text::get('FEEDBACK_ACCOUNT_SUSPENDED') . round(abs($result->user_suspension_timestamp - time())/60/60, 2) . " hours left";
-            Session::add('feedback_negative', $suspensionTimer);
-            return false;
-        }
-        // reset the failed login counter for that user (if necessary)
-        if ($result->user_last_failed_login > 0) {
-            self::resetFailedLoginCounterOfUser($result->user_name);
-        }
-        // save timestamp of this login in the database line of that user
-        self::saveTimestampOfLoginOfUser($result->user_name);
-        // if user has checked the "remember me" checkbox, then write token into database and into cookie
-        if ($set_remember_me_cookie) {
-            self::setRememberMeInDatabaseAndCookie($result->user_id);
-        }
-        // successfully logged in, so we write all necessary data into the session and set "user_logged_in" to true
-        self::setSuccessfulLoginIntoSession(
-            $result->user_id, $result->user_name, $result->user_email, $result->user_account_type
-        );
-        // return true to make clear the login was successful
-        // maybe do this in dependence of setSuccessfulLoginIntoSession ?
-        return true;
+        Session::set('failed_login_count', Session::get('failed_login_count') + 1);
+        Session::set('failed_login_ts', time());
     }
+    private function resetFailedLoginCount()
+    {
+        Session::set('failed_login_count', 0);
+        Session::set('failed_login_ts', 0);
+    }
+
+    private function setSession($user)
+    {
+        Session::init();
+        session_regenerate_id(true);
+        $_SESSION = array();
+
+        Session::set('user_id', $user->id);
+        Session::set('user_name', $user->name);
+        Session::set('user_group_id', $user->group_id);
+
+        Session::updateSession();
+        Cookie::set(session_name(), session_id());
+    }
+
 
 }
