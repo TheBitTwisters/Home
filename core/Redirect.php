@@ -16,6 +16,12 @@ class Redirect
         header("location: " . Config::get('URL_ROOT') . $login_url);
     }
 
+    public static function admin()
+    {
+        $redirect_url = Config::get('LOGIN_REDIRECT_URL');
+        header("location: " . Config::get('URL_ROOT') . $redirect_url);
+    }
+
     public static function to($path)
     {
         $path = trim($path, '/');
