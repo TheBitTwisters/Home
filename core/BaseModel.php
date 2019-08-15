@@ -15,14 +15,14 @@ class BaseModel
         $this->setup();
     }
 
-    protected function run($sql, $data)
+    public function run($sql, $data)
     {
         $this->stmt = $this->db->prepare($sql);
         $this->stmt->execute($data);
         return $this->stmt;
     }
 
-    protected function fetch($fetch_type = null)
+    public function fetch($fetch_type = null)
     {
         if ($fetch_type) {
             return $this->stmt->fetch($fetch_type);
@@ -30,7 +30,7 @@ class BaseModel
         return $this->stmt->fetch();
     }
 
-    protected function fetchAll($fetch_type = null, $fetch_argument = null)
+    public function fetchAll($fetch_type = null, $fetch_argument = null)
     {
         if ($fetch_type) {
             if ($fetch_argument) {
