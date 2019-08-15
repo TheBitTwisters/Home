@@ -1,256 +1,92 @@
-.navbar
+.pfs-bg-dark
 {
     background: #0B2640;
     border: 0px;
 }
-.nav-header > li > a
+
+.pfs-body
 {
+    background: url("/img/pfs-bg.jpg") repeat;
+    background-position: center;
     font-family: 'Bree Serif', serif !important;
-    color: #FFFFFF !important;
-    line-height: 2;
-    font-size: 12pt;
 }
-.nav-header > li > a:hover,.nav-header > li > a:focus
+.pfs-box-shadow
 {
-    background-color: #FFFFFF;
-    font-weight: bolder;
-    color: #0B2640 !important;
+    box-shadow: 0 0 30px #FFFFFF;
 }
-.navbar-default
-{
-    margin-bottom: 0px;
-}
-.jumbotron
+
+.pfs-banner
 {
     position: relative;
-    height: 500px;
+    height: 360px;
     margin-bottom: 0px;
     background-image: url('/img/pfs-banner.jpg');
-    background-position: 80% 0%;
+    background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
-    color: #F0FF0C;
+    border-radius: 0;
+    color: #f8f9fa;
     text-shadow: black 0.3em 0.3em 0.3em;
-    border-radius: 0 !important;
 }
-hr
+.pfs-banner-title
 {
-    margin-top: 0;
-}
-.breadcrumb
-{
-    background: #00000000;
-}
-
-.jumbotron .title
-{
+    color: #F0FF0C;
     font-family: 'Great Vibes', cursive;
     font-size: 50pt;
-    margin-bottom: 0;
 }
-.jumbotron .slogan
+.pfs-banner-caption
 {
+    color: #f8f9fa;
     font-family: 'Cookie', cursive;
-    color: white;
     font-size: 30pt;
 }
-.img-responsive
+
+.pfs-content
 {
-    width: 100%;
-}
-a:hover
-{
-    color: #0B2640;
-}
-.thumbnail
-{
-    text-align: center;
-    position: relative;
-}
-.thumbnail .caption
-{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #3379BF;
-    padding: 5px 5px;
-    margin: 5px;
-    color: #fff;
-    opacity: 0.8;
+    background: #70a4ff;
+    background: -webkit-linear-gradient(#3684d2, #70a4ff);
+    background: -o-linear-gradient(#3684d2, #70a4ff);
+    background: -moz-linear-gradient(#3684d2, #70a4ff);
+    background: linear-gradient(#3684d2, #70a4ff);
+    padding-top: 1.5rem;
+    padding-right: 15px;
+    padding-bottom: 1.5rem;
+    padding-left: 15px;
 }
 
-.pfs-panel
-{
-    margin: 5rem;
-}
 .pfs-title
 {
     font-weight: bolder;
-    text-align: left;
     text-shadow: 0 0 2px #fff;
 }
 .pfs-paragraph
 {
     font-size: 12pt;
     text-indent: 50px;
-    text-align: justify;
     text-shadow: 0 0 15px #fff;
 }
-.content h3
-{
-    margin: 0;
-    color: #fff;
-    text-shadow: 0 0 5px #000;
-}
-.content h3 small
-{
-    color: #e2e2e2;
-}
-.content.panel
-{
-    border: 0;
-}
-.content.panel-default
-{
-    background: #00000000;
-}
-.content.panel-default .panel-heading
-{
-    background: #00000000;
-    text-align: center;
-}
-.content.panel-default .panel-body
-{
-    text-align: justify;
-    font-size: 12pt;
-}
-.content.panel-default .panel-footer
-{
-    background: #00000000;
-}
 
-body
-{
-    background: url("/img/pfs-bg.jpg") repeat;
-    font-family: 'Bree Serif', serif !important;
-
-}
-.container
-{
-    box-shadow: 0 0 30px #FFFFFF;
-    padding-left: 0;
-    padding-right: 0;
-    margin-bottom: 20px;
-}
-main
-{
-    background: #BACFFF; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#3379BF, #C8DCFF); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#3379BF, #C8DCFF); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#3379BF, #C8DCFF); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#3379BF, #C8DCFF); /* Standard syntax */
-    padding: 15px;
-}
-.thumbnail img
-{
-    width: 100%;
-}
-.list-group-item .thumbnail
-{
-    margin-bottom: 0;
-}
-
-.sidenav.panel-default .panel-heading
-{
-    background: #0B2640;
-    color: #FFFFFF;
-    font-family: 'Cookie', cursive !important;
-    font-size: 20pt;
-    letter-spacing: 2px;
-    margin-bottom: 0px;
-    text-align: center;
-}
-.sidenav.panel-default .panel-body
-{
-     background: #485D7F; /* For browsers that do not support gradients */
-     background: -webkit-linear-gradient(left, #485D7F , #A0B0CC); /* For Safari 5.1 to 6.0 */
-     background: -o-linear-gradient(right, #485D7F, #A0B0CC); /* For Opera 11.1 to 12.0 */
-     background: -moz-linear-gradient(right, #485D7F, #A0B0CC); /* For Firefox 3.6 to 15 */
-     background: linear-gradient(to right, #485D7F , #A0B0CC); /* Standard syntax */
-     padding-bottom: 0;
-}
-.sidenav.panel-default .panel-footer
-{
-    background: #485D7F;
-}
-.sidenav.panel-default .panel-footer a
-{
-    color: #fff;
-}
-
-.well.contact
-{
-    background: rgba(255,255,255,.4);
-}
-
-footer
+.pfs-footer
 {
     background: #3379BF;
+    color: #f8f9fa;
     padding: 10px 20px 10px 30px;
 }
-footer a
+.pfs-footer a
 {
-    color: #fff;
+    color: #f8f9fa;
     text-transform: uppercase;
     font-size: 0.8em;
     text-decoration: underline;
 }
-footer p.address
+
+
+a:hover
 {
-    margin-bottom: 0px;
-    color: #FFFFFF !important;
-    font-size: 10pt;
-    text-align: center;
-}
-footer p.mobile
-{
-    color: #FFFFFF !important;
-    font-size: 10pt;
-    text-align: center;
-}
-footer p.copyright
-{
-    margin-bottom: 0px;
-    color: #FFFFFF !important;
-    font-size: 10pt;
-    text-align: center;
+    color: #0B2640;
 }
 
-@media screen and (min-width: 768px)
-{
-    body
-    {
-        margin-bottom: 10px;
-    }
-}
-@media screen and (max-width: 767px)
-{
-    .jumbotron
-    {
-        height: auto;
-    }
-    .jumbotron h1
-    {
-        font-size: 3em !important;
-    }
-    .jumbotron p
-    {
-        font-size: 1.5em !important;
-    }
-}
-
+/* 
                             .adsbygoogle { width: 320px; height: 100px; }
 @media(min-width: 768px)  { .adsbygoogle { width: 468px; height:  60px; } }
 @media(min-width: 992px)  { .adsbygoogle { width: 728px; height:  90px; } }
-@media(min-width: 1200px) { .adsbygoogle { width: 970px; height:  90px; } }
+@media(min-width: 1200px) { .adsbygoogle { width: 970px; height:  90px; } } */
