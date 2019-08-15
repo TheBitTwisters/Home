@@ -22,7 +22,7 @@ class Session
     {
         if (isset($_SESSION[$key])) {
             $value = $_SESSION[$key];
-            return Filter::XSSFilter($value);
+            return Filter::special($value);
         }
         return false;
     }
@@ -50,6 +50,31 @@ class Session
 
     public static function updateSession()
     {
-        // TODO: Future updates
+        $sql = "UPDATE sessions
+                   SET ts_last_active=:ts_last_active
+                 WHERE user_id=:user_id AND session=:session";
+        $data = [
+            ':ts_last_active' => time(),
+            ':user_id' => Session::get('user_id'),
+            ':session' => session_id()
+        ];
+        $model = new BaseModel();
+        $model->run($sql, $data);
+        if (!$model->rowCount()) self::addSession();
     }
+
+    private static function addSession()
+    {
+        $sql = "INSERT INTO sessions ( user_id,  session,  ip,  ts_last_active)
+                     VALUES          (:user_id, :session, :ip, :ts_last_active)";
+        $data = [
+            ':user_id' => Session::get('user_id'),
+            ':session' => session_id(),
+            ':ip' => $_SERVER['REMOTE_ADDR'],
+            ':ts_last_active' => time()
+        ];
+        $model = new BaseModel();
+        $model->run($sql, $data);
+    }
+
 }
