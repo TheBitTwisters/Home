@@ -41,6 +41,11 @@ class BaseModel
         return $this->stmt->fetchAll();
     }
 
+    public function affectedRows()
+    {
+        return $this->stmt->rowCount();
+    }
+
     private function setup()
     {
         $db_type = Config::get('DB_TYPE');
