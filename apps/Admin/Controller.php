@@ -16,9 +16,7 @@ class Controller extends \Home\BaseController
 
     public function index()
 	{
-        if (!Auth::check()) {
-            return RenderType::REQUIRE_LOGIN;
-        }
+        if (!Auth::check()) return RenderType::REQUIRE_LOGIN;
 
 		$this->render('admin/index', $data);
 		return RenderType::OK;
