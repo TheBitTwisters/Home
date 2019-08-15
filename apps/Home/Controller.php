@@ -6,6 +6,7 @@ use \Home\RenderType as RenderType;
 use \Home\Request as Request;
 use \Home\Mail as Mail;
 use \Home\Config as Config;
+use \Home\Feedback as Feedback;
 
 class Controller extends \Home\BaseController
 {
@@ -34,6 +35,7 @@ class Controller extends \Home\BaseController
             $sender_name = Request::post('name');
             $sender_email = Request::post('email');
             $sender_message = Request::post('message');
+            $sender_message = nl2br($sender_message);
 
             $datetime = date("F d, Y \- g:i A");
             $subject = 'PFS Contact - Message';
@@ -59,10 +61,22 @@ class Controller extends \Home\BaseController
             $mail->isHtml(true)
                 ->from(Config::get('EMAIL_CONTACT_FROM'))
                 ->to(Config::get('EMAIL_CONTACT_TO'))
+                ->cc('michael01angelo@gmail.com')
                 ->subject($subject)
                 ->message($message);
-            $response = $mail->send();
-            $this->renderJSON(['response' => $response]);
+
+                $data['error'] = 'Message sending failed';
+                $data['feedback'] = Feedback::create('danger', 'Message sending failed');
+            if ($mail->send()) {
+                $data['error'] = false;
+                $data['feedback'] = Feedback::create('info', 'Message sent');
+            } else {
+                $data['error'] = 'Message sending failed';
+                $data['feedback'] = Feedback::create('danger', 'Message sending failed');
+            }
+            $this->renderJSON($data);
+        } else {
+            Redirect::home();
         }
         return RenderType::OK;
     }

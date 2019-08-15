@@ -44,29 +44,33 @@
                         </p>
                         <div class="card bg-light">
                             <div class="card-body">
-                                <form action="/home/contact_send" method="post">
+                                <form id="form-contact">
+                                    <div class="form-group row mb-1">
+                                        <div class="offset-md-4 offset-xl-3 col-md-8 col-xl-9">
+                                            <div id="feedback-contact"></div>
+                                        </div>
+                                    </div>
                                     <div class="form-group row mb-1">
                                         <label for="form-contact-name" class="col-md-4 col-xl-3 col-form-label text-md-right">Name:</label>
                                         <div class="col-md-8 col-xl-9">
-                                            <input type="text" class="form-control" id="form-contact-name" name="name" value="">
+                                            <input type="text" class="form-control" id="form-contact-name" value="">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-1">
                                         <label for="form-contact-email" class="col-md-4 col-xl-3 col-form-label text-md-right">Email / Phone:</label>
                                         <div class="col-md-8 col-xl-9">
-                                            <input type="text" class="form-control" id="form-contact-email" name="email" value="">
+                                            <input type="text" class="form-control" id="form-contact-email" value="">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-1">
                                         <label for="form-contact-message" class="col-md-4 col-xl-3 col-form-label text-md-right">Message:</label>
                                         <div class="col-md-8 col-xl-9">
-                                            <textarea class="form-control" id="form-contact-message" name="message" rows="5"></textarea>
+                                            <textarea class="form-control" id="form-contact-message" rows="5"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-0">
-                                        <label for="form-contact-message" class="col-md-4 col-xl-3 col-form-label text-md-right"></label>
-                                        <div class="col-md-8 col-xl-9">
-                                            <button type="submit" class="btn btn-success">Send</button>
+                                        <div class="offset-md-4 offset-xl-3 col-md-8 col-xl-9">
+                                            <button type="button" id="form-contact-submit" class="btn btn-success">Send</button>
                                         </div>
                                     </div>
                                 </form>
@@ -78,6 +82,39 @@
 <?php $this->render('home/template_footer'); ?>
         </div>
 <?php $this->render('home/template_scripts'); ?>
-<?php // $this->render('home/template_adsense'); ?>
+        <script type="text/javascript">
+            $(function() {
+
+                $('#form-contact-submit').on('click', contact_send);
+
+            });
+
+            function contact_send()
+            {
+                name = $('#form-contact-name').val();
+                email = $('#form-contact-email').val();
+                message = $('#form-contact-message').val();
+                csrf_token = '<?=\Home\Csrf::makeToken();?>';
+                $.ajax({
+                    type: 'POST',
+                    url: '/home/contact_send',
+                    data: {
+                        'name': name,
+                        'email': email,
+                        'message': message,
+                        'csrf_token': csrf_token
+                    },
+                    success: function(result) {
+                        if (result.error) {
+                            console.log(JSON.stringify(result));
+                        } else {
+                            $('#form-contact').trigger('reset');
+                        }
+                        if (result.feedback) $('#feedback-contact').feedback(result.feedback);
+                    }
+                });
+            }
+        </script>
+<?php $this->render('home/template_adsense'); ?>
     </body>
 </html>
