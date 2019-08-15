@@ -56,7 +56,7 @@ class Mail
 
         $mail->CharSet = 'UTF-8';
         $mail->IsSMTP();
-        $mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 0;
         $mail->SMTPAuth = Config::get('EMAIL_SMTP_AUTH');
         if (Config::get('EMAIL_SMTP_ENCRYPTION')) {
             $mail->SMTPSecure = Config::get('EMAIL_SMTP_ENCRYPTION');
@@ -86,12 +86,7 @@ class Mail
             $mail->addCC($email);
         }
 
-        $email_sent = $mail->Send();
-        if ($email_sent) {
-            return true;
-        } else {
-            return $mail->ErrorInfo;
-        }
+        return $mail->Send();
     }
 
 }
