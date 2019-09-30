@@ -48,6 +48,14 @@ class Session
         return (self::get('user_id') > 0);
     }
 
+    public function deleteSession()
+    {
+        $sql = "DELETE FROM sessions
+                      WHERE session = :session";
+        $data = [':session' => session_id()];
+        $this->run($sql, $data);
+    }
+
     public static function updateSession()
     {
         $sql = "UPDATE sessions
@@ -60,7 +68,7 @@ class Session
         ];
         $model = new BaseModel();
         $model->run($sql, $data);
-        if (!$model->rowCount()) self::addSession();
+        if (!$model->affectedRows()) self::addSession();
     }
 
     private static function addSession()
