@@ -2,15 +2,17 @@
 
 namespace Admin;
 
-use \Home\Auth as Auth;
-use \Home\RenderType as RenderType;
-use \Home\Request as Request;
-use \Home\Csrf as Csrf;
-use \Home\Cookie as Cookie;
-use \Home\Config as Config;
-use \Home\Feedback as Feedback;
-use \Home\Session as Session;
-use \Home\Redirect as Redirect;
+use \Home\{
+    Auth as Auth,
+    RenderType as RenderType,
+    Request as Request,
+    Csrf as Csrf,
+    Cookie as Cookie,
+    Config as Config,
+    Feedback as Feedback,
+    Session as Session,
+    Redirect as Redirect
+};
 
 class Controller extends \Home\BaseController
 {
