@@ -48,13 +48,30 @@ class Controller extends \Home\BaseController
       return RenderType::OK;
     }
 
-    public function check_notices()
+    public function check_notices() 
+    {
+      $data['notices'][] = [
+        'id' => 1,
+        'title' => 'Notice 1',
+        'content' => 'Notice 1 Sample content'
+      ];
+      $data['notices'][] = [
+        'id' => 2,
+        'title' => 'Notice 2',
+        'content' => 'Notice 2 Sample content'
+      ];
+
+      $this->renderJSON($data);
+      return RenderType::OK;
+    }
+
+    public function check_faq()
     {
       $data = [
-        'notices' => [
+        'faq' => [
           'id' => 1,
-          'title' => 'Notice 1',
-          'content' => 'Notice 1 Sample content'
+          'question' => 'What is Doosan?',
+          'asnwer' => 'Notice 1 Sample content'
         ],
         'notices' => [
           'id' => 2,
@@ -67,3 +84,4 @@ class Controller extends \Home\BaseController
       return RenderType::OK;
     }
 }
+ 
