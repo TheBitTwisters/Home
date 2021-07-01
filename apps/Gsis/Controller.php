@@ -65,23 +65,67 @@ class Controller extends \Home\BaseController
       return RenderType::OK;
     }
 
-    public function check_faq()
+    public function check_documents() 
     {
-      $data = [
-        'faq' => [
-          'id' => 1,
-          'question' => 'What is Doosan?',
-          'asnwer' => 'Notice 1 Sample content'
-        ],
-        'notices' => [
-          'id' => 2,
-          'title' => 'Notice 2',
-          'content' => 'Notice 2 Sample content'
-        ],
+      $data['documents'][] = [
+        'id' => 1,
+        'title' => 'DXC300LC-5K',
+        'href' => '#',
+        'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
+        'version' => '1.0',
+        'date' => '2021-06-08',
+        'file_type' => 'OM'
+      ];
+      $data['documents'][] = [
+        'id' => 1,
+        'title' => 'DXC300LC-8K',
+        'href' => '#',
+        'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
+        'version' => '1.0',
+        'date' => '2021-06-08',
+        'file_type' => 'SM'
+      ];
+     
+
+      $this->renderJSON($data);
+      return RenderType::OK;
+    }
+
+    public function check_qa()
+    {
+      $data['qa'][] = [
+        'id' => 1,
+        'question' => 'What is Doosan?',
+        'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
+      ];
+      $data['qa'][] = [
+        'id' => 2,
+        'question' => 'What is Doosan?',
+        'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
       ];
 
       $this->renderJSON($data);
       return RenderType::OK;
     }
+
+    public function check_faq()
+    {
+      $data['faq'][] = [
+        'id' => 1,
+        'question' => 'What is Doosan?',
+        'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
+      ];
+      $data['faq'][] = [
+        'id' => 2,
+        'question' => 'What is Doosan?',
+        'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
+      ];
+
+      $this->renderJSON($data);
+      return RenderType::OK;
+    }
+
+   
 }
+
  
