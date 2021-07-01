@@ -109,6 +109,166 @@ class Controller extends \Home\BaseController
     return RenderType::OK;
   }
 
+  public function fetchManuals()
+  {
+    $method = Request::type();
+    $params = [
+      'id' => Request::get('id'),
+      'auth_key' => Request::get('auth_key')
+    ];
+    if ($method == 'GET') {
+      if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
+        $data = [
+          'id' => '',
+          'title' => '',
+          'href' => '',
+          'img' => '',
+          'version' => '',
+          'date' => '',
+          'file_type' => ''
+        ];
+      } else {
+        $data = [];
+      }
+    } else {
+      $data = [];
+    }
+    
+
+    $this->renderJSON($data);
+    return RenderType::OK;
+  }
+
+  public function searchManuals()
+  {
+    $method = Request::type();
+    $params = [
+      'id' => Request::get('id'),
+      'auth_key' => Request::get('auth_key'),
+      'keyword' => Request::get('keyword')
+    ];
+    if ($method == 'GET') {
+      if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
+        if ($params['keyword'] == 'Tractor') {
+          $data = [
+            'id' => '',
+            'title' => '',
+            'href' => '',
+            'img' => '',
+            'version' => '',
+            'date' => '',
+            'file_type' => ''
+          ];
+        }
+      } else {
+        $data = [];
+      }
+    } else {
+      $data = [];
+    }
+  
+    $this->renderJSON($data);
+    return RenderType::OK;
+  }
+
+  public function getBookmark()
+  {
+    $method = Request::type();
+    $params = [
+      'id' => Request::get('id'),
+      'auth_key' => Request::get('auth_key')
+    ];
+    if ($method == 'GET') {
+      if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
+          $data = [
+            'id' => '',
+            'name' => '',
+            'manual_id' => '',
+            'page' => ''
+          ];
+      } else {
+        $data = [];
+      }
+    } else {
+      $data = [];
+    }
+  
+    $this->renderJSON($data);
+    return RenderType::OK;
+  }
+
+  public function getNotification()
+  {
+    $method = Request::type();
+    $params = [
+      'id' => Request::get('id'),
+      'auth_key' => Request::get('auth_key')
+    ];
+    if ($method == 'GET') {
+      if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
+          $data = [
+            'id' => '',
+            'title' => '',
+            'content' => ''          ];
+      } else {
+        $data = [];
+      }
+    } else {
+      $data = [];
+    }
+  
+    $this->renderJSON($data);
+    return RenderType::OK;
+  }
+
+  public function getQA()
+  {
+    $method = Request::type();
+    $params = [
+      'id' => Request::get('id'),
+      'auth_key' => Request::get('auth_key')
+    ];
+    if ($method == 'GET') {
+      if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
+          $data = [
+            'id' => '',
+            'question' => '',
+            'answer' => ''          ];
+      } else {
+        $data = [];
+      }
+    } else {
+      $data = [];
+    }
+  
+    $this->renderJSON($data);
+    return RenderType::OK;
+  }
+
+  public function getFAQ()
+  {
+    $method = Request::type();
+    $params = [
+      'id' => Request::get('id'),
+      'auth_key' => Request::get('auth_key')
+    ];
+    if ($method == 'GET') {
+      if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
+          $data = [
+            'id' => '',
+            'question' => '',
+            'answer' => ''          ];
+      } else {
+        $data = [];
+      }
+    } else {
+      $data = [];
+    }
+  
+    $this->renderJSON($data);
+    return RenderType::OK;
+  }
+
   public function check_notices()
   {
     $data['notices'][] = [
