@@ -95,7 +95,8 @@ class Controller extends \Home\BaseController
           'name' => 'Dehny Ahn',
           'telephone' => '+123 456 789',
           'email' => 'email@email.com',
-          'address' => 'Seoul'
+          'address' => 'Seoul',
+          'role' => 'admin'
         ];
       } else {
         $data = [];
@@ -181,10 +182,10 @@ class Controller extends \Home\BaseController
     if ($method == 'GET') {
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
           $data = [
-            'id' => '',
-            'name' => '',
-            'manual_id' => '',
-            'page' => ''
+            'id' => '1',
+            'name' => 'My Bookmark',
+            'manual_id' => '213',
+            'page' => '12'
           ];
       } else {
         $data = [];
