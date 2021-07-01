@@ -119,13 +119,13 @@ class Controller extends \Home\BaseController
     if ($method == 'GET') {
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
         $data = [
-          'id' => '',
-          'title' => '',
-          'href' => '',
-          'img' => '',
-          'version' => '',
-          'date' => '',
-          'file_type' => ''
+          'id' => '1',
+          'title' => 'DXC300LC-5K',
+          'href' => '#',
+          'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
+          'version' => '1.0',
+          'date' => '2021-06-08',
+          'file_type' => 'OM'
         ];
       } else {
         $data = [];
@@ -151,13 +151,13 @@ class Controller extends \Home\BaseController
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
         if ($params['keyword'] == 'Tractor') {
           $data = [
-            'id' => '',
-            'title' => '',
-            'href' => '',
-            'img' => '',
-            'version' => '',
-            'date' => '',
-            'file_type' => ''
+            'id' => '1',
+            'title' => 'DXC300LC-5K',
+            'href' => '#',
+            'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
+            'version' => '1.0',
+            'date' => '2021-06-08',
+            'file_type' => 'OM'
           ];
         }
       } else {
@@ -207,9 +207,9 @@ class Controller extends \Home\BaseController
     if ($method == 'GET') {
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
           $data = [
-            'id' => '',
-            'title' => '',
-            'content' => ''          ];
+            'id' => '1',
+            'title' => 'Notice 1',
+            'content' => 'Notice 1 sample content'          ];
       } else {
         $data = [];
       }
@@ -231,9 +231,9 @@ class Controller extends \Home\BaseController
     if ($method == 'GET') {
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
           $data = [
-            'id' => '',
-            'question' => '',
-            'answer' => ''          ];
+            'id' => '1',
+            'question' => 'What is Doosan?',
+            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'          ];
       } else {
         $data = [];
       }
@@ -255,9 +255,9 @@ class Controller extends \Home\BaseController
     if ($method == 'GET') {
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
           $data = [
-            'id' => '',
-            'question' => '',
-            'answer' => ''          ];
+            'id' => '1',
+            'question' => 'What is Doosan?',
+            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'          ];
       } else {
         $data = [];
       }
@@ -268,82 +268,4 @@ class Controller extends \Home\BaseController
     $this->renderJSON($data);
     return RenderType::OK;
   }
-
-  public function check_notices()
-  {
-    $data['notices'][] = [
-      'id' => 1,
-      'title' => 'Notice 1',
-      'content' => 'Notice 1 Sample content'
-    ];
-    $data['notices'][] = [
-      'id' => 2,
-      'title' => 'Notice 2',
-      'content' => 'Notice 2 Sample content'
-    ];
-
-    $this->renderJSON($data);
-    return RenderType::OK;
-  }
-
-  public function check_documents()
-  {
-    $data['documents'][] = [
-      'id' => 1,
-      'title' => 'DXC300LC-5K',
-      'href' => '#',
-      'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
-      'version' => '1.0',
-      'date' => '2021-06-08',
-      'file_type' => 'OM'
-    ];
-    $data['documents'][] = [
-      'id' => 1,
-      'title' => 'DXC300LC-8K',
-      'href' => '#',
-      'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
-      'version' => '1.0',
-      'date' => '2021-06-08',
-      'file_type' => 'SM'
-    ];
-
-
-    $this->renderJSON($data);
-    return RenderType::OK;
-  }
-
-  public function check_qa()
-  {
-    $data['qa'][] = [
-      'id' => 1,
-      'question' => 'What is Doosan?',
-      'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
-    ];
-    $data['qa'][] = [
-      'id' => 2,
-      'question' => 'What is Doosan?',
-      'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
-    ];
-
-    $this->renderJSON($data);
-    return RenderType::OK;
-  }
-
-  public function check_faq()
-  {
-    $data['faq'][] = [
-      'id' => 1,
-      'question' => 'What is Doosan?',
-      'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
-    ];
-    $data['faq'][] = [
-      'id' => 2,
-      'question' => 'What is Doosan?',
-      'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
-    ];
-
-    $this->renderJSON($data);
-    return RenderType::OK;
-  }
-
 }
