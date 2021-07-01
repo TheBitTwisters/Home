@@ -39,15 +39,15 @@ class Controller extends \Home\BaseController
     ];
 
     if ($method == 'POST') {
-      if ($params['id'] == 'A012345' && $params['admin321']) {
+      if ($params['id'] == 'A012345' && $params['password']=='admin321') {
         $data['error'] = false;
         $data['token'] = 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X';
-        $data['message'] => 'Login successfully';
+        $data['message'] = 'Login successfully';
       } else {
-        $data['message'] => 'ID or Password does not match';
+        $data['message'] = 'ID or Password does not match';
       }
     } else {
-      $data['message'] => 'Access forbidden';
+      $data['message'] = 'Access forbidden';
     }
 
     $this->renderJSON($data);
@@ -56,13 +56,27 @@ class Controller extends \Home\BaseController
 
   public function fetchUserdata()
   {
-    $data = [
-      'id' => 'admin',
-      'name' => 'Dehny Ahn',
-      'telephone' => '+123 456 789',
-      'email' => 'email@email.com',
-      'address' => 'Seoul'
+    $method = Request::type();
+    $params = [
+      'id' => Request::get('id'),
+      'auth_key' => Request::get('auth_key')
     ];
+    if ($method == 'GET') {
+      if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
+        $data = [
+          'id' => 'admin',
+          'name' => 'Dehny Ahn',
+          'telephone' => '+123 456 789',
+          'email' => 'email@email.com',
+          'address' => 'Seoul'
+        ];
+      } else {
+        $data = [];
+      }
+    } else {
+      $data = [];
+    }
+    
 
     $this->renderJSON($data);
     return RenderType::OK;
