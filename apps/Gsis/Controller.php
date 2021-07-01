@@ -33,21 +33,48 @@ class Controller extends \Home\BaseController
     ];
 
     $data = [
-      'token' => '',
-      'error' => true,
-      'message' => 'Login failed'
+      'name' => '',
+      'auth_key' => '',
+      'status' => '',
+      'role' => ''
     ];
 
     if ($method == 'POST') {
       if ($params['id'] == 'A012345' && $params['password']=='admin321') {
-        $data['error'] = false;
-        $data['token'] = 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X';
-        $data['message'] = 'Login successfully';
+        $data = [
+          'name' => 'Dehny Ahn',
+          'auth_key' => 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X',
+          'status' => 'active',
+          'role' => 'admin'
+        ];
+      }
+    }
+    $this->renderJSON($data);
+		return RenderType::OK;
+	}
+
+  public function signup()
+	{
+    $method = Request::type();
+    $params = [
+      'machine_location' => Request::post('machine_location'),
+      'email' => Request::post('email'),
+      'password' => Request::post('password'),
+      'confirm_password' => Request::post('confirm_password')
+    ];
+
+    $data = [
+      'id' => 'A012345'
+    ];
+
+    if ($method == 'POST') {
+      if ($params['password'] == $params['confirm_password']) {
+        $data['id'] = 'A012345';
       } else {
-        $data['message'] = 'ID or Password does not match';
+        $data = [];
       }
     } else {
-      $data['message'] = 'Access forbidden';
+      $data = [];
     }
 
     $this->renderJSON($data);
