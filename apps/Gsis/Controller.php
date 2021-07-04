@@ -40,7 +40,7 @@ class Controller extends \Home\BaseController
     ];
 
     if ($method == 'POST') {
-      if ($params['id'] == 'A012345' && $params['password']=='admin321') {
+      if ($params['id'] == 'A012345' && $params['password'] == 'admin321') {
         $data = [
           'name' => 'Dehny Ahn',
           'auth_key' => 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X',
@@ -49,6 +49,7 @@ class Controller extends \Home\BaseController
         ];
       }
     }
+
     $this->renderJSON($data);
 		return RenderType::OK;
 	}
@@ -104,7 +105,6 @@ class Controller extends \Home\BaseController
     } else {
       $data = [];
     }
-    
 
     $this->renderJSON($data);
     return RenderType::OK;
@@ -120,13 +120,15 @@ class Controller extends \Home\BaseController
     if ($method == 'GET') {
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
         $data = [
-          'id' => '1',
-          'title' => 'DXC300LC-5K',
-          'href' => '#',
-          'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
-          'version' => '1.0',
-          'date' => '2021-06-08',
-          'file_type' => 'OM'
+          [
+            'id' => '1',
+            'title' => 'DXC300LC-5K',
+            'href' => '#',
+            'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
+            'version' => '1.0',
+            'date' => '2021-06-08',
+            'file_type' => 'OM'
+          ]
         ];
       } else {
         $data = [];
@@ -134,7 +136,7 @@ class Controller extends \Home\BaseController
     } else {
       $data = [];
     }
-    
+
 
     $this->renderJSON($data);
     return RenderType::OK;
@@ -167,7 +169,7 @@ class Controller extends \Home\BaseController
     } else {
       $data = [];
     }
-  
+
     $this->renderJSON($data);
     return RenderType::OK;
   }
@@ -193,7 +195,7 @@ class Controller extends \Home\BaseController
     } else {
       $data = [];
     }
-  
+
     $this->renderJSON($data);
     return RenderType::OK;
   }
@@ -217,7 +219,7 @@ class Controller extends \Home\BaseController
     } else {
       $data = [];
     }
-  
+
     $this->renderJSON($data);
     return RenderType::OK;
   }
@@ -241,7 +243,7 @@ class Controller extends \Home\BaseController
     } else {
       $data = [];
     }
-  
+
     $this->renderJSON($data);
     return RenderType::OK;
   }
@@ -265,7 +267,7 @@ class Controller extends \Home\BaseController
     } else {
       $data = [];
     }
-  
+
     $this->renderJSON($data);
     return RenderType::OK;
   }
