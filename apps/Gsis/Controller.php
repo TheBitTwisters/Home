@@ -110,6 +110,45 @@ class Controller extends \Home\BaseController
     return RenderType::OK;
   }
 
+  public function fetchNewManuals()
+  {
+    $method = Request::type();
+    $params = [
+      'id' => Request::get('id'),
+      'auth_key' => Request::get('auth_key')
+    ];
+    if ($method == 'GET') {
+      if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
+        $data = [
+          [
+            'id' => '1',
+            'title' => 'DXC300LC-5K',
+            'href' => '#',
+            'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
+            'version' => '1.0',
+            'date' => '2021-06-08',
+            'file_type' => 'OM'
+          ],
+          [
+            'id' => '2',
+            'title' => 'DXC300LC-7',
+            'href' => '#',
+            'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
+            'version' => '1.0',
+            'date' => '2021-07-01',
+            'file_type' => 'OM'
+          ]
+        ];
+      } else {
+        $data = [];
+      }
+    } else {
+      $data = [];
+    }
+    $this->renderJSON($data);
+    return RenderType::OK;
+  }
+
   public function fetchManuals()
   {
     $method = Request::type();
