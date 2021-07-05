@@ -202,6 +202,7 @@ class Controller extends \Home\BaseController
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
         if ($params['keyword'] == 'Tractor') {
           $data = [
+            [
             'id' => '1',
             'title' => 'DXC300LC-5K',
             'href' => '#',
@@ -209,6 +210,7 @@ class Controller extends \Home\BaseController
             'version' => '1.0',
             'date' => '2021-06-08',
             'file_type' => 'OM'
+            ]
           ];
         }
       } else {
