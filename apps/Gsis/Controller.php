@@ -128,6 +128,15 @@ class Controller extends \Home\BaseController
             'version' => '1.0',
             'date' => '2021-06-08',
             'file_type' => 'OM'
+          ],
+          [
+            'id' => '2',
+            'title' => 'DXC300LC-7',
+            'href' => '#',
+            'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
+            'version' => '1.0',
+            'date' => '2021-07-01',
+            'file_type' => 'OM'
           ]
         ];
       } else {
@@ -210,9 +219,12 @@ class Controller extends \Home\BaseController
     if ($method == 'GET') {
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
           $data = [
-            'id' => '1',
-            'title' => 'Notice 1',
-            'content' => 'Notice 1 sample content'          ];
+            [
+              'id' => '1',
+              'title' => 'New app version',
+              'content' => 'Notice 1 sample content'
+            ]
+          ];
       } else {
         $data = [];
       }
