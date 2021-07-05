@@ -234,9 +234,17 @@ class Controller extends \Home\BaseController
     if ($method == 'GET') {
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
           $data = [
+            [
             'id' => '1',
             'question' => 'What is Doosan?',
-            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'          ];
+            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'     
+            ],   
+            [
+            'id' => '2',
+            'question' => 'What is Doosan 2?',
+            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'     
+            ],
+          ];
       } else {
         $data = [];
       }
