@@ -321,7 +321,12 @@ class Controller extends \Home\BaseController
               'id' => '1',
             'question' => 'What is Doosan?',
             'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
-            ]          
+            ],
+            [
+            'id' => '2',
+            'question' => 'What is Doosan2?',
+            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
+            ]             
           ];
       } else {
         $data = [];
