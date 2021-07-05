@@ -196,7 +196,8 @@ class Controller extends \Home\BaseController
     $params = [
       'id' => Request::get('id'),
       'auth_key' => Request::get('auth_key'),
-      'keyword' => Request::get('keyword')
+      'keyword' => Request::get('keyword'),
+      'category' => Request::get('category')
     ];
     if ($method == 'GET') {
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
