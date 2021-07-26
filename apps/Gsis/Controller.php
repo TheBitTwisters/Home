@@ -160,22 +160,24 @@ class Controller extends \Home\BaseController
       if ($params['id'] == 'A012345' && $params['auth_key'] == 'AeHPvhg2Tqx6t83LkQMbZGaNFJnKWV9X') {
         $data = [
           [
-            'id' => '1',
+            'id' => 'UN7E94JBAXZYK85T2LWPGSD36MHQVCFR',
             'title' => 'DXC300LC-5K',
             'href' => '#',
             'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
             'version' => '1.0',
             'date' => '2021-06-08',
-            'file_type' => 'OM'
+            'file_type' => 'OM',
+            'downloadUrl' => 'https://thebittwisters.com/file.zip'
           ],
           [
-            'id' => '2',
+            'id' => 'RPUY8VENZC5QMFW92X4BDS3T7J6KHGAL',
             'title' => 'DXC300LC-7',
             'href' => '#',
             'img' => 'https://s7d2.scene7.com/is/image/Caterpillar/CM20190927-1f4f1-6deb0?wid=600&hei=400&op_sharpen=1&qlt=100',
             'version' => '1.0',
             'date' => '2021-07-01',
-            'file_type' => 'OM'
+            'file_type' => 'OM',
+            'downloadUrl' => 'https://thebittwisters.com/file.zip'
           ]
         ];
       } else {
@@ -291,12 +293,12 @@ class Controller extends \Home\BaseController
             [
             'id' => '1',
             'question' => 'What is Doosan?',
-            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'     
-            ],   
+            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
+            ],
             [
             'id' => '2',
             'question' => 'What is Doosan 2?',
-            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'     
+            'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
             ],
           ];
       } else {
@@ -329,7 +331,7 @@ class Controller extends \Home\BaseController
             'id' => '2',
             'question' => 'What is Doosan2?',
             'answer' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta nisi maximus nibh mollis, et pharetra augue viverra.'
-            ]             
+            ]
           ];
       } else {
         $data = [];
